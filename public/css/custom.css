@@ -1,0 +1,12 @@
+.ubea-accordion-content {
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.ubea-accordion.active .ubea-accordion-content {
+    display: block;
+}
+
+.ubea-accordion.active .ubea-accordion-heading .icon i {
+    transform: rotate(45deg);
+} 
