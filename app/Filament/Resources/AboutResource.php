@@ -9,9 +9,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-
+use App\Filament\Traits\HasResourcePermissions;
 class AboutResource extends Resource
 {
+    use HasResourcePermissions;
     protected static ?string $model = About::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';

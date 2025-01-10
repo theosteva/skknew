@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Traits\HasResourcePermissions;
 use App\Filament\Resources\SliderResource\Pages;
 use App\Models\Slider;
 use Filament\Forms;
@@ -14,6 +15,8 @@ use Filament\Forms\Components\TextInput;
 
 class SliderResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Slider::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
@@ -185,5 +188,10 @@ class SliderResource extends Resource
             'create' => Pages\CreateSlider::route('/create'),
             'edit' => Pages\EditSlider::route('/{record}/edit'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('view-sliders');
     }
 } 

@@ -26,10 +26,13 @@
             </div>
             <div class="col-md-6">
                 <ul class="ubea-social-icons pull-right">
-                    <li><a href="{{ $contact->twitter ?? '#' }}"><i class="icon-twitter"></i></a></li>
-                    <li><a href="{{ $contact->facebook ?? '#' }}"><i class="icon-facebook"></i></a></li>
-                    <li><a href="{{ $contact->linkedin ?? '#' }}"><i class="icon-linkedin"></i></a></li>
-                    <li><a href="{{ $contact->instagram ?? '#' }}"><i class="icon-instagram"></i></a></li>
+                    @foreach(\App\Models\SocialMedia::where('is_active', true)->orderBy('order')->get() as $social)
+                        <li>
+                            <a href="{{ $social->url }}" target="_blank">
+                                <i class="{{ $social->icon }}"></i>
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

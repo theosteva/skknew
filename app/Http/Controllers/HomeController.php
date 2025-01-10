@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Body;
 use App\Models\Slider;
 use App\Models\BodyHeader;
-use App\Models\ImageHeading;
-use App\Models\ImageContent;
+use App\Models\ProductHeading;
+use App\Models\ProductContent;
 use App\Models\FaqHeader;
 use App\Models\Faq;
 use App\Models\About;
@@ -27,10 +27,10 @@ class HomeController extends Controller
         $BodyHeader = BodyHeader::where('is_active', true)
                         ->first();
                         
-        $imageHeading = ImageHeading::where('is_active', true)
+        $ProductHeading = ProductHeading::where('is_active', true)
                         ->first();
            
-        $imageContents = ImageContent::where('is_active', true)
+        $ProductContents = ProductContent::where('is_active', true)
         ->orderBy('order')
         ->get();
 
@@ -42,7 +42,7 @@ class HomeController extends Controller
 
         $about = About::where('is_active', true)->first();
 
-        return view('home', compact('bodies', 'sliders', 'BodyHeader', 'imageHeading', 'imageContents', 'faqHeader', 'faqs', 'about'));
+        return view('home', compact('bodies', 'sliders', 'BodyHeader', 'ProductHeading', 'ProductContents', 'faqHeader', 'faqs', 'about'));
       
 
     }

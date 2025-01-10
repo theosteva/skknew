@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Filament\Resources;
-
 use App\Filament\Resources\BodyHeaderResource\Pages;
+use App\Filament\Traits\HasResourcePermissions;
 use App\Models\BodyHeader;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,6 +12,7 @@ use Filament\Tables\Table;
 
 class BodyHeaderResource extends Resource
 {
+    use HasResourcePermissions;
     protected static ?string $model = BodyHeader::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Body Page';

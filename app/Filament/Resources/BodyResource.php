@@ -10,9 +10,11 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
+use App\Filament\Traits\HasResourcePermissions;
 
 class BodyResource extends Resource
 {
+    use HasResourcePermissions;
     protected static ?string $model = Body::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Body Page';

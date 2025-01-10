@@ -1,22 +1,45 @@
+@php
+    $meta = \App\Models\MetaSetting::first();
+@endphp
+
+<!DOCTYPE html>
 <html>
-	<head>
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PT Sakti Kinerja Kolaborasindo</title>
+	<title>{{ $meta->meta_title ?? config('app.name') }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by freshdesignweb.com" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="freshdesignweb.com" />
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content="https://ptskk.id/images/logo/favicon.png"/>
-	<meta property="og:url" content="https://ptskk.id"/>
-	<meta property="og:site_name" content="PT Sakti Kinerja Kolaborasindo"/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+	<meta name="description" content="{{ $meta->meta_description }}">
+	<meta name="keywords" content="{{ $meta->meta_keywords }}">
+	<meta name="author" content="{{ $meta->meta_author }}">
+	
+	<!-- Open Graph -->
+	<meta property="og:title" content="{{ $meta->og_title ?? $meta->meta_title }}">
+	<meta property="og:description" content="{{ $meta->og_description ?? $meta->meta_description }}">
+	<meta property="og:image" content="{{ Storage::url($meta->og_image) }}">
+	
+	
+	@if($meta->google_analytics_id)
+		<!-- Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id={{ $meta->google_analytics_id }}"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', '{{ $meta->google_analytics_id }}');
+		</script>
+	@endif
+	
+	@if($meta->google_ads_id)
+		<!-- Google Ads -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id={{ $meta->google_ads_id }}"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', '{{ $meta->google_ads_id }}');
+		</script>
+	@endif
 
 	<!-- <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet"> -->
 	
@@ -66,5 +89,11 @@
 	<script src="js/magnific-popup-options.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
+
+	<!-- Mobile Meta Tags -->
+	<meta name="theme-color" content="#your-color-code">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="PT Sakti Kinerja Kolaborasindo">
 
 	</head>

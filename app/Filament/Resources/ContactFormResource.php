@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Traits\HasResourcePermissions;
 use App\Filament\Resources\ContactFormResource\Pages;
 use App\Models\ContactForm;
 use Filament\Forms;
@@ -12,6 +13,8 @@ use Filament\Tables\Table;
 
 class ContactFormResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = ContactForm::class;
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
     protected static ?string $navigationGroup = 'Contact Management';
@@ -98,5 +101,10 @@ class ContactFormResource extends Resource
             'index' => Pages\ListContactForms::route('/'),
             'view' => Pages\ViewContactForm::route('/{record}'),
         ];
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('view-contacts');
     }
 } 

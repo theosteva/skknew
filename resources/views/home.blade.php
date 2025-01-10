@@ -93,20 +93,20 @@
 
 		<div class="ubea-section" id="ubea-portfolio" data-section="portfolio">
 		<div class="ubea-container">	
-		@if($imageHeading)
+		@if($ProductHeading)
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center ubea-heading">
-					<h2>{{ $imageHeading->title }}</h2>
-					<p>{{ $imageHeading->description }}</p>
+					<h2>{{ $ProductHeading->title }}</h2>
+					<p>{{ $ProductHeading->description }}</p>
 				</div>
 			</div>
 			@endif
 			<div class="row">
-				@foreach($imageContents as $image)
+				@foreach($ProductContents as $image)
 					<div class="col-md-4">
 						<a href="{{ asset('storage/' . $image->image) }}" class="ubea-card-item image-popup" title="{{ $image->title }}">
 							<figure>
-								<div class="overlay"><i class="ti-plus"></i></div>
+								<div class="overlay"><i class="ti-search"></i></div>
 								<img src="{{ asset('storage/' . $image->image) }}" alt="{{ $image->title }}" class="img-responsive">
 							</figure>
 						</a>

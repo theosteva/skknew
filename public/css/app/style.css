@@ -2047,4 +2047,32 @@ form label {
   font-size: 22px;
 }
 
+.images-logo-place {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+}
+
+.images-logo-header {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.images-logo-iso {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-brand {
+    padding: 10px 0;
+    display: block;
+}
+
+#ubea-logo {
+    padding: 5px 0;
+}
+
 /*# sourceMappingURL=style.css.map */
