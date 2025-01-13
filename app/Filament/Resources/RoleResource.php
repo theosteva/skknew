@@ -144,8 +144,8 @@ class RoleResource extends Resource
                                                 }
                                             }),
 
-                                        Forms\Components\Checkbox::make('content_management')
-                                            ->label('Content Management')
+                                        Forms\Components\Checkbox::make('button_management')
+                                            ->label('Button Management')
                                             ->dehydrated(false)
                                             ->live()
                                             ->afterStateHydrated(function ($component, $state, $record) {
@@ -197,8 +197,6 @@ class RoleResource extends Resource
                                                     $record->revokePermissionTo($contactPermissions);
                                                 }
                                             }),
-
-                                        
                                     ]),
                             ]),
 

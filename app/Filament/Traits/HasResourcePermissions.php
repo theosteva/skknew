@@ -3,6 +3,11 @@
 namespace App\Filament\Traits;
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ViewRecord;
 
 trait HasResourcePermissions
 {
@@ -13,18 +18,24 @@ trait HasResourcePermissions
             ->before('Resource')
             ->toString();
 
-        // Tambahkan mapping khusus untuk resource tertentu
+        // Mapping khusus untuk beberapa resource
         $mapping = [
             'About' => 'content',
-            'BodyHeader' => 'body',
             'Body' => 'body',
+            'BodyHeader' => 'body',
+            'Faq' => 'faqs',
             'FaqHeader' => 'faqs',
-            'ProductContent' => 'products',
-            'ProductHeading' => 'products',
+            'ProductContent' => 'content',
+            'ProductHeading' => 'content',
+            'ContactForm' => 'contacts',
+            'MetaSetting' => 'meta-settings',
+            'User' => 'users',
+            'Role' => 'roles',
+            'Slider' => 'sliders',
         ];
 
-        // Gunakan mapping jika ada, jika tidak gunakan versi slug dari nama resource
-        $prefix = $mapping[$resourceName] ?? Str::slug(Str::plural($resourceName));
+        // Gunakan mapping jika ada, jika tidak gunakan versi kebab dari nama resource
+        $prefix = $mapping[$resourceName] ?? Str::kebab(Str::plural($resourceName));
 
         return [
             'view' => "view-{$prefix}",
@@ -32,5 +43,35 @@ trait HasResourcePermissions
             'update' => "edit-{$prefix}",
             'delete' => "delete-{$prefix}",
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->can(static::getPermissionPrefixes()['view']) ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()?->can(static::getPermissionPrefixes()['create']) ?? false;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return auth()->user()?->can(static::getPermissionPrefixes()['update']) ?? false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return auth()->user()?->can(static::getPermissionPrefixes()['delete']) ?? false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->user()?->can(static::getPermissionPrefixes()['delete']) ?? false;
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
     }
 } 
